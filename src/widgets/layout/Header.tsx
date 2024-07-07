@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { NavigationLink } from 'widgets/layout';
 
 import { DeviceTypeProps } from 'shared/lib';
-import { useDeviceType } from 'shared/store';
+import { useDeviceTypeStore } from 'shared/store';
 
 export function Header() {
-  const deviceType = useDeviceType();
+  const deviceType = useDeviceTypeStore((state) => state.deviceType);
   console.log('deviceType:', deviceType);
   return (
     <HeaderWrapper $deviceType={deviceType}>

@@ -5,26 +5,26 @@ import { GetItemsParams } from 'features/item-list/lib/api';
 import { ItemToolbar } from 'features/item-list/ui';
 
 import { DeviceTypeProps } from 'shared/lib';
-import { useDeviceType } from 'shared/store';
+import { useDeviceTypeStore } from 'shared/store';
 
 import HeartIcon from '/images/ic_heart.svg';
 
-export type ItemType = 'all' | 'best';
+export type Item = 'all' | 'best';
 
 interface ItemTypeProps extends DeviceTypeProps {
-  $type?: ItemType;
-  childern?: React.ReactNode;
+  $type?: Item;
+  children?: React.ReactNode;
 }
 
 interface ItemListProps extends GetItemsParams {
-  type: ItemType;
+  type: Item;
   setOrder?: (order: GetItemsParams['order']) => void;
 }
 
 export function ItemList({ type, page, pageSize, order, setOrder, search }: ItemListProps) {
   const { items } = useFetchItems({ page, pageSize, order, search });
-  const deviceType = useDeviceType();
-  const getItemType = (type: ItemType) => {
+  const deviceType = useDeviceTypeStore((state) => state.deviceType);
+  const getItemType = (type: Item) => {
     if (type === 'best') {
       return '베스트 상품';
     }
@@ -40,23 +40,17 @@ export function ItemList({ type, page, pageSize, order, setOrder, search }: Item
         {type === 'all' && <ItemToolbar order={order} setOrder={setOrder} />}
       </ItemWrapper>
       <ItemInfo $type={type} $deviceType={deviceType}>
-        {items &&
-          items.map((item) => (
-            <ItemCard key={item.id}>
-              <ItemImage
-                $type={type}
-                $deviceType={deviceType}
-                src={item.images[0]}
-                alt={item.name}
-              />
-              <ItemName>{item.name}</ItemName>
-              <ItemPrice>{item.price.toLocaleString()}원</ItemPrice>
-              <FavoriteWrapper>
-                <FavoriteIcon src={HeartIcon} />
-                <FavoriteCount> {item.favoriteCount}</FavoriteCount>
-              </FavoriteWrapper>
-            </ItemCard>
-          ))}
+        {items.map((item) => (
+          <ItemCard key={item.id}>
+            <ItemImage $type={type} $deviceType={deviceType} src={item.images[0]} alt={item.name} />
+            <ItemName>{item.name}</ItemName>
+            <ItemPrice>{item.price.toLocaleString()}원</ItemPrice>
+            <FavoriteWrapper>
+              <FavoriteIcon src={HeartIcon} />
+              <FavoriteCount> {item.favoriteCount}</FavoriteCount>
+            </FavoriteWrapper>
+          </ItemCard>
+        ))}
       </ItemInfo>
     </ItemContainer>
   );
@@ -139,7 +133,7 @@ const ItemImage = styled.img<ItemTypeProps>`
     }
   }};
   border-radius: 16px;
-  box-shadow: 0 8px 24px #959da533;
+  // box-shadow: 0 8px 24px #959da533;
 `;
 
 const ItemName = styled.p`

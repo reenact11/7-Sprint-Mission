@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 
-import { ItemType } from 'widgets/item-list';
+import { Item } from 'widgets/item-list';
 
 import { DeviceTypeProps } from 'shared/lib';
-import { useDeviceType } from 'shared/store';
+import { useDeviceTypeStore } from 'shared/store';
 
 import ArrowLeftICon from '/images/arrow_left.svg';
 import ArrowRightICon from '/images/arrow_right.svg';
 
 interface PaginationProps {
-  type: ItemType;
+  type: Item;
   page: number;
   setPage: (page: number) => void;
 }
@@ -21,7 +21,7 @@ type ButtonProps = {
 const TOTAL_PAGES = 5;
 
 export function Pagination({ page, setPage }: PaginationProps) {
-  const deviceType = useDeviceType();
+  const deviceType = useDeviceTypeStore((state) => state.deviceType);
 
   const handlePrevPage = () => {
     if (page > 1) {
@@ -102,9 +102,9 @@ const PageButton = styled.button<ButtonProps>`
   ${({ $active }) =>
     $active &&
     `
-            background-color: var(--blue);
-            color: #fff;
-        `}
+    background-color: var(--blue);
+    color: #fff;
+    `}
 `;
 
 const PrevNextImage = styled.img`

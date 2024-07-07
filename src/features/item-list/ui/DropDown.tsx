@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { ItemToolbarProps, Order } from 'features/item-list/ui';
 
 import { DeviceTypeProps } from 'shared/lib';
-import { useDeviceType } from 'shared/store';
+import { useDeviceTypeStore } from 'shared/store';
 
 import ArrowDownIcon from '/images/ic_arrow_down.svg';
 import SortIcon from '/images/ic_sort.svg';
@@ -13,7 +13,7 @@ import SortIcon from '/images/ic_sort.svg';
 export function DropDown({ order, setOrder }: ItemToolbarProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
-  const deviceType = useDeviceType();
+  const deviceType = useDeviceTypeStore((state) => state.deviceType);
 
   const isMobile = deviceType === 'mobile';
   const buttonText = order === 'recent' ? '최신순' : '좋아요순';

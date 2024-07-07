@@ -8,7 +8,7 @@ interface DeviceTypeState {
   setDeviceType: (width: number) => void;
 }
 
-const useDeviceTypeStore = create<DeviceTypeState>((set) => ({
+export const useDeviceTypeStore = create<DeviceTypeState>((set) => ({
   // 상태 초기화
   deviceType: getDeviceType(window.innerWidth),
 
@@ -17,6 +17,3 @@ const useDeviceTypeStore = create<DeviceTypeState>((set) => ({
     set({ deviceType: getDeviceType(width) });
   },
 }));
-
-export const useDeviceType = () => useDeviceTypeStore((state) => state.deviceType);
-export const useSetDeviceType = () => useDeviceTypeStore((state) => state.setDeviceType);

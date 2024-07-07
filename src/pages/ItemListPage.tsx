@@ -9,18 +9,18 @@ import { GetItemsParams } from 'features/item-list/lib/api';
 import { Pagination } from 'features/item-list/ui';
 
 import { DeviceTypeProps } from 'shared/lib';
-import { useDeviceType } from 'shared/store';
+import { useDeviceTypeStore } from 'shared/store';
 
-type PageType = GetItemsParams['page'];
-type SearchType = GetItemsParams['search'];
-type OrderType = GetItemsParams['order'];
+type Page = GetItemsParams['page'];
+type Search = GetItemsParams['search'];
+type Order = GetItemsParams['order'];
 
 export function ItemListPage() {
-  const [page, setPage] = useState<PageType>(1);
-  const [search, setSearch] = useState<SearchType>('');
-  const [order, setOrder] = useState<OrderType>('recent');
+  const [page, setPage] = useState<Page>(1);
+  const [search, setSearch] = useState<Search>('');
+  const [order, setOrder] = useState<Order>('recent');
 
-  const deviceType = useDeviceType();
+  const deviceType = useDeviceTypeStore((state) => state.deviceType);
 
   const allItemsPageSize = usePageSize('all');
   const bestItemsPageSize = usePageSize('best');

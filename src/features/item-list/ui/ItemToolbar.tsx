@@ -6,7 +6,7 @@ import { GetItemsParams } from 'features/item-list/lib/api';
 import { DropDown } from 'features/item-list/ui';
 
 import { DeviceTypeProps } from 'shared/lib';
-import { useDeviceType } from 'shared/store';
+import { useDeviceTypeStore } from 'shared/store';
 
 import SearchIcon from '/images/ic_search.svg';
 
@@ -17,7 +17,7 @@ export interface ItemToolbarProps {
 }
 
 export function ItemToolbar({ order, setOrder }: ItemToolbarProps) {
-  const deviceType = useDeviceType();
+  const deviceType = useDeviceTypeStore((state) => state.deviceType);
   const isMobile = deviceType === 'mobile';
 
   return (
@@ -62,10 +62,12 @@ const ItemToolbarWrapper = styled.div<DeviceTypeProps>`
 `;
 
 const SearchItemInput = styled.input<DeviceTypeProps>`
-    background-color: #f3f4f6;
+    background-color: var(--gray100);
     background-image: url(${SearchIcon});
     background-position: 15px;
     background-repeat: no-repeat;
+    font-size: 16px;
+    line-height: 24px;
     border: none;
     border-radius: 12px;
     height: 42px;

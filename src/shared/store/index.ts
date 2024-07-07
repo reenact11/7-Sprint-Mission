@@ -1,1 +1,1 @@
-export { useDeviceType, useSetDeviceType } from './useDeviceTypeStore';
+export { useDeviceTypeStore } from './useDeviceTypeStore';

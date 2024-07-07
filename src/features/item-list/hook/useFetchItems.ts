@@ -9,14 +9,14 @@ import { handleAxiosError } from 'shared/lib';
 interface FetchItemsResult {
   items: Item[];
   isLoading: boolean;
-  isError: string | null;
+  errorMessage: string | null;
 }
 
 // 상품 목록 조회 커스텀 훅
 export function useFetchItems({ page, pageSize, order, search }: GetItemsParams): FetchItemsResult {
   const [items, setItems] = useState<Item[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [isError, setIsError] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchItems() {
@@ -28,7 +28,7 @@ export function useFetchItems({ page, pageSize, order, search }: GetItemsParams)
         if (axios.isAxiosError(error)) {
           handleAxiosError(error);
         }
-        setIsError('상품 목록을 불러오는 중 문제가 발생했습니다.');
+        setErrorMessage('상품 목록을 불러오는 중 문제가 발생했습니다.');
       } finally {
         setIsLoading(false);
       }
@@ -36,5 +36,5 @@ export function useFetchItems({ page, pageSize, order, search }: GetItemsParams)
     fetchItems();
   }, [page, pageSize, order, search]);
 
-  return { items, isLoading, isError };
+  return { items, isLoading, errorMessage };
 }
