@@ -80,7 +80,7 @@ const PageButton = styled.button<ButtonProps>`
   background-color: #fff;
   border: 1px solid var(--gray200);
   border-radius: 50%;
-  color: var(--gray600);
+  color: var(--gray500);
   cursor: pointer;
   font-size: 16px;
   line-height: 19.09px;

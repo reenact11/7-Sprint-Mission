@@ -78,6 +78,7 @@ const ItemWrapper = styled.div`
 export const ItemTypeName = styled.h2<ItemTypeProps>`
   font-size: 20px;
   line-height: 140%;
+  color: var(--gray800);
   display: ${({ $type, $deviceType }) => {
     if ($type === 'all') {
       if ($deviceType === 'mobile') return 'none';
@@ -140,12 +141,14 @@ const ItemName = styled.p`
   padding-top: 10px;
   font-size: 14px;
   line-height: 16.71px;
+  color: var(--gray800);
 `;
 
 const ItemPrice = styled.p`
   font-size: 16px;
   font-weight: 700;
   line-height: 19.09px;
+  color: var(--gray800);
 `;
 
 const FavoriteWrapper = styled.div`

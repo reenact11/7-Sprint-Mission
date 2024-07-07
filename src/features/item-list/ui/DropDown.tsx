@@ -79,6 +79,7 @@ const DropDownIcon = styled.img<DeviceTypeProps>`
 const SortByItem = styled.span`
   font-size: 16px;
   line-height: 24px;
+  color: var(--gray800);
 `;
 
 const DropDownMenu = styled.ul`
@@ -100,6 +101,7 @@ const DropDownMenu = styled.ul`
 
 const DropDownItem = styled.li`
   padding: 12px 20px;
+  color: var(--gray800);
   border-bottom: 1px solid var(--gray200);
   &:last-child {
     border-bottom: none;
